@@ -1,0 +1,23 @@
+{
+  "name": "my-lodash",
+  "version": "1.0.0",
+  "description": "lodash의 foreach, map, reduce, filter 등 직접 구현해보기",
+  "main": "myLodash.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SPLee123/my-lodash.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SPLee123/my-lodash/issues"
+  },
+  "homepage": "https://github.com/SPLee123/my-lodash#readme",
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "lodash": "^4.17.21"
+  }
+}
