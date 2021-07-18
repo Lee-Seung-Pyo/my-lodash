@@ -64,15 +64,13 @@ describe('map', () => {
   test('배열을 순회하며 나온 결과 값의 배열을 반환한다.', () => {
     const result = _.map([4, 8], square);
 
-    expect(result[0]).toBe(16);
-    expect(result[1]).toBe(64);
+    expect(result).toEqual([16, 64]);
   });
 
   test('객체를 순회하며 나온 결과 값의 배열을 반환한다.', () => {
     const result = _.map({ 'a': 4, 'b': 8 }, square);
 
-    expect(result[0]).toBe(16);
-    expect(result[1]).toBe(64);
+    expect(result).toEqual([16, 64]);
   });
 
   test('문자열을 순회하며 나온 결과 값의 배열을 반환한다.', () => {
@@ -80,8 +78,30 @@ describe('map', () => {
 
     const result = _.map('abc', fn);
 
-    expect(result[0]).toBe('a1');
-    expect(result[1]).toBe('b1');
-    expect(result[2]).toBe('c1');
+    expect(result).toEqual(['a1', 'b1', 'c1']);
+  });
+});
+
+describe('filter', () => {
+  const isPositive = jest.fn((n) => n > 0);
+
+  test('배열을 순회하며 조건을 통과한 값의 배열을 반환한다.', () => {
+    const result = _.filter([1, -1, 2, 0], isPositive);
+
+    expect(result).toEqual([1, 2]);
+  });
+
+  test('객체를 순회하며 조건을 통과한 값의 배열을 반환한다.', () => {
+    const result = _.filter({ a: 1, b: -1, c: 2, d: 0 }, isPositive);
+
+    expect(result).toEqual([1, 2]);
+  });
+
+  test('문자열을 순회하며 조건을 통과한 값의 배열을 반환한다.', () => {
+    const isOdd = jest.fn((n) => parseInt(n) % 2);
+
+    const result = _.filter('123456789', isOdd);
+
+    expect(result).toEqual(['1', '3', '5', '7', '9']);
   });
 });
