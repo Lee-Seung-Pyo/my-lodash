@@ -57,3 +57,31 @@ describe('forEach', () => {
     expect(fn.mock.calls.length).toBe(11);
   });
 });
+
+describe('map', () => {
+  const square = jest.fn((n) => n * n);
+
+  test('배열을 순회하며 나온 결과 값의 배열을 반환한다.', () => {
+    const result = _.map([4, 8], square);
+
+    expect(result[0]).toBe(16);
+    expect(result[1]).toBe(64);
+  });
+
+  test('객체를 순회하며 나온 결과 값의 배열을 반환한다.', () => {
+    const result = _.map({ 'a': 4, 'b': 8 }, square);
+
+    expect(result[0]).toBe(16);
+    expect(result[1]).toBe(64);
+  });
+
+  test('문자열을 순회하며 나온 결과 값의 배열을 반환한다.', () => {
+    const fn = jest.fn((n) => n + 1);
+
+    const result = _.map('abc', fn);
+
+    expect(result[0]).toBe('a1');
+    expect(result[1]).toBe('b1');
+    expect(result[2]).toBe('c1');
+  });
+});
