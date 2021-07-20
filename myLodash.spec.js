@@ -7,7 +7,7 @@ describe('forEach', () => {
     let i = 0;
 
     const fn = jest.fn((value, index, collection) => {
-      expect(index).toBe(i + '');
+      expect(index).toBe(i);
       expect(value).toBe(arr[i]);
       expect(collection).toBe(arr);
       i += 1;
@@ -46,7 +46,7 @@ describe('forEach', () => {
     let i = 0;
 
     const fn = jest.fn((value, index, collection) => {
-      expect(index).toBe(i + '');
+      expect(index).toBe(i);
       expect(value).toBe(str[i]);
       expect(collection).toBe(str);
       i += 1;

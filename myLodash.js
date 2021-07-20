@@ -2,8 +2,20 @@ module.exports = {
   identity(value) {
     return value;
   },
+  hasLength(collection) {
+    const length = collection.length;
+
+    return Number.isInteger(length) && length >= 0;
+  },
+  getKeys(collection) {
+    if (this.hasLength(collection)) {
+      return [ ...Array(collection.length).keys() ];
+    }
+
+    return Object.keys(collection);
+  },
   forEach(collection, iteratee = this.identity) {
-    const keys = Object.keys(collection);
+    const keys = this.getKeys(collection);
     const length = keys.length;
 
     for (let i = 0; i < length; i++) {
@@ -17,7 +29,7 @@ module.exports = {
     return collection;
   },
   map(collection, iteratee = this.identity) {
-    const keys = Object.keys(collection);
+    const keys = this.getKeys(collection);
     const length = keys.length;
     const mappedArray = [];
 
@@ -29,7 +41,7 @@ module.exports = {
     return mappedArray;
   },
   filter(collection, predicate = this.identity) {
-    const keys = Object.keys(collection);
+    const keys = this.getKeys(collection);
     const length = keys.length;
     const filteredArray = [];
 
@@ -44,7 +56,7 @@ module.exports = {
     return filteredArray;
   },
   reduce(collection, iteratee = this.identity, accumulator) {
-    const keys = Object.keys(collection);
+    const keys = this.getKeys(collection);
     const length = keys.length;
     let i = 0;
 
