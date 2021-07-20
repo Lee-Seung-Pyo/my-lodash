@@ -35,7 +35,7 @@ module.exports = {
 
     for (let i = 0; i < length; i++) {
       const result = predicate(collection[keys[i]], keys[i], collection);
-      
+
       if (result) {
         filteredArray.push(collection[keys[i]]);
       }
@@ -43,5 +43,20 @@ module.exports = {
 
     return filteredArray;
   },
-  reduce() {}
+  reduce(collection, iteratee = this.identity, accumulator) {
+    const keys = Object.keys(collection);
+    const length = keys.length;
+    let i = 0;
+
+    if (accumulator === undefined) {
+      accumulator = collection[keys[0]];
+      i = 1;
+    }
+
+    for (; i < length; i++) {
+      accumulator = iteratee(accumulator, collection[keys[i]], keys[i], collection);
+    }
+
+    return accumulator;
+  }
 };

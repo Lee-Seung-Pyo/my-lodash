@@ -105,3 +105,80 @@ describe('filter', () => {
     expect(result).toEqual(['1', '3', '5', '7', '9']);
   });
 });
+
+describe('reduce', () => {
+  describe('배열', () => {
+    const arr = [1, 2, 3, 4];
+    const reducer = (acc, cur) => acc + cur;
+
+    test('배열을 순회하며 리듀서를 실행한 값을 반환한다. (초기값 있음)', () => {
+      const result = _.reduce(arr, reducer, 1);
+      expect(result).toBe(11);
+    });
+
+    test('배열을 순회하며 리듀서를 실행한 값을 반환한다. (초기값 없음)', () => {
+      const result = _.reduce(arr, reducer);
+      expect(result).toBe(10);
+    });
+
+    test('빈 배열이고 초기값 있을 경우 초기값을 반환한다.', () => {
+      const result = _.reduce([], reducer, 1);
+      expect(result).toBe(1);
+    });
+
+    test('빈 배열이고 초기값 없을 경우 undefined를 반환한다.', () => {
+      const result = _.reduce([], reducer);
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('객체', () => {
+    const obj = { a: 1, b: 2, c: 3, d: 4 };
+    const reducer = (acc, cur) => acc + cur;
+
+    test('객체를 순회하며 리듀서를 실행한 값을 반환한다. (초기값 있음)', () => {
+      const result = _.reduce(obj, reducer, 1);
+      expect(result).toBe(11);
+    });
+
+    test('객체를 순회하며 리듀서를 실행한 값을 반환한다. (초기값 없음)', () => {
+      const result = _.reduce(obj, reducer);
+      expect(result).toBe(10);
+    });
+
+    test('빈 객체이고 초기값 있을 경우 초기값을 반환한다.', () => {
+      const result = _.reduce({}, reducer, 1);
+      expect(result).toBe(1);
+    });
+
+    test('빈 객체이고 초기값 없을 경우 undefined를 반환한다.', () => {
+      const result = _.reduce({}, reducer);
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('문자열', () => {
+    const str = '1234';
+    const reducer = (acc, cur) => parseInt(acc) + parseInt(cur);
+
+    test('문자열을 순회하며 리듀서를 실행한 값을 반환한다. (초기값 있음)', () => {
+      const result = _.reduce(str, reducer, 1);
+      expect(result).toBe(11);
+    });
+
+    test('문자열을 순회하며 리듀서를 실행한 값을 반환한다. (초기값 없음)', () => {
+      const result = _.reduce(str, reducer);
+      expect(result).toBe(10);
+    });
+
+    test('빈 문자열이고 초기값 있을 경우 초기값을 반환한다.', () => {
+      const result = _.reduce('', reducer, 1);
+      expect(result).toBe(1);
+    });
+
+    test('빈 문자열이고 초기값 없을 경우 undefined를 반환한다.', () => {
+      const result = _.reduce('', reducer);
+      expect(result).toBeUndefined();
+    });
+  });
+});
