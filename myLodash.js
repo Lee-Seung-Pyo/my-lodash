@@ -8,11 +8,9 @@ module.exports = {
     return Number.isInteger(length) && length >= 0;
   },
   getKeys(collection) {
-    if (this.hasLength(collection)) {
-      return [ ...Array(collection.length).keys() ];
-    }
-
-    return Object.keys(collection);
+    return this.hasLength(collection)
+      ? [...Array(collection.length).keys()]
+      : Object.keys(collection);
   },
   forEach(collection, iteratee = this.identity) {
     const keys = this.getKeys(collection);
@@ -66,9 +64,14 @@ module.exports = {
     }
 
     for (; i < length; i++) {
-      accumulator = iteratee(accumulator, collection[keys[i]], keys[i], collection);
+      accumulator = iteratee(
+        accumulator,
+        collection[keys[i]],
+        keys[i],
+        collection
+      );
     }
 
     return accumulator;
-  }
+  },
 };
